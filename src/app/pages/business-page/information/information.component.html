@@ -1,1 +1,138 @@
-<p>information works!</p>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/app/negocios']">Negocios</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Informacion</li>
+    </ol>
+</nav>
+<div class="main-content" *ngIf="business">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Negocio</h4>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="title">Nombre:</label><label> {{ business.name}}</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="title">Giro: </label><label>{{ business.core_business}}</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="title">Telefono: </label><label>{{ business.phone}}</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="title">Correo: </label><label>{{ business.email}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Localización</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12"> 
+                                <agm-map  [latitude]="latitude" [longitude]="longitude" [zoom]="14">
+                                    <agm-marker [latitude]="latitude" [longitude]="longitude"  ></agm-marker>
+                                </agm-map>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                  <label class="title">Direccion: </label><label>{{ business.address}}</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                  <label class="title">Ciudad: </label><label>{{ business.city}}</label>
+                            </div>
+                            <div class="col-md-4">
+                                    <label class="title">Estado: </label><label>{{ business.state}}</label>
+                            </div>
+                            <div class="col-md-4">
+                                 <label>Codigo Postal: </label><label>{{ business.code_postal}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Operacion y Servicio</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <h5>Servicio</h5>
+                                    </li>
+                                    <li class="list-group-item option" *ngIf="business.service.closed">
+                                        <h6> Cerrado indefinidamente</h6>
+                                    </li>
+                                    <li class="list-group-item option" *ngIf="business.service.opened">
+                                        <h6> Abierto Normal</h6>
+                                    </li>
+                                    <li class="list-group-item" *ngIf="business.service.limited_open">
+                                        <h6> Abierto en horarios limitados</h6>
+                                    </li>
+                                    <li class="list-group-item option" *ngIf="business.service.opened_without_spaces">
+                                        <h6> Abierto con espacios reducidos</h6>
+                                    </li>
+                                    <li class="list-group-item option" *ngIf="business.service.delivery">
+                                        <h6> Abierto solo para entregar pedidos</h6>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <h5>Tipo de Operación</h5>
+                                    </li>
+                                    <li class="list-group-item option" *ngIf="business.type_of_operation.owner_delivery">
+                                        <h6>Envio a domicilio propio</h6>
+                                    </li>
+                                    <li class="list-group-item option"  *ngIf="business.type_of_operation.app_delivery">
+                                        <h6>Envio a domicilio por plataformas como Uber y Rappi</h6>
+                                    </li>
+                                    <li class="list-group-item option"  *ngIf="business.type_of_operation.client_delivery">
+                                        <h6>Ponerse de acuerdo para la entrega</h6>
+                                    </li>
+                                    <li class="list-group-item option"  *ngIf="business.type_of_operation.just_to_go">
+                                        <h6>Solo para llevar</h6>
+                                    </li>
+                                    <li class="list-group-item option"  *ngIf="business.type_of_operation.pre_order">
+                                        <h6>Pedidos anticipados</h6>
+                                    </li>
+                                    <li class="list-group-item option"  *ngIf="business.type_of_operation.pick_up_shop">
+                                        <h6>Recoger en tienda</h6>
+                                    </li>
+                                    <li class="list-group-item option" *ngIf="business.type_of_operation.other">
+                                        <h6>{{ business.type_of_operation.other}}</h6>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Descripción</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h6>{{ business.description}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

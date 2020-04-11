@@ -4,16 +4,15 @@
         <li class="breadcrumb-item active" aria-current="page">Nuevo</li>
     </ol>
 </nav>
-<div class="main-content">
+<div class="main-content" [formGroup]="businessForm">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10 offset-md-1">
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title">Negocio</h4>
-                        <p class="card-category">Crear Negocio</p>
                     </div>
-                    <div class="card-body" [formGroup]="businessForm">
+                    <div class="card-body">
                         <div>
                             <div class="row">
                                 <div class="col-md-3">
@@ -37,127 +36,146 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h4>Localiza tu negocio</h4>
-                                    <agm-map *ngIf="(location$ | async) as location" [latitude]="location?.latitude" [longitude]="location?.longitude" [zoom]="14">
-                                        <agm-marker [latitude]="location?.latitude" [longitude]="location?.longitude" [markerDraggable]="true" (dragEnd)="dragEnd($event)"></agm-marker>
-                                    </agm-map>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Direccion" type="text" formControlName="address">
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Ciudad" type="text" formControlName="city">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Estado" type="text" formControlName="state">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Codigo Postal" type="text" formControlName="code_postal">
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6" formGroupName="service" s>
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <h5>Servicio</h5>
-                                        </li>
-                                        <li class="list-group-item option">
-                                            <mat-checkbox formControlName="closed">
-                                                <h6> Cerrado indefinidamente</h6>
-                                            </mat-checkbox>
-                                        </li>
-                                        <li class="list-group-item option">
-                                            <mat-checkbox formControlName="opened">
-                                                <h6> Abierto Normal</h6>
-                                            </mat-checkbox>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <mat-checkbox formControlName="limited_open">
-                                                <h6> Abierto en horarios limitados</h6>
-                                            </mat-checkbox>
-                                        </li>
-                                        <li class="list-group-item option">
-                                            <mat-checkbox formControlName="opened_without_spaces">
-                                                <h6> Abierto con espacios reducidos</h6>
-                                            </mat-checkbox>
-                                        </li>
-                                        <li class="list-group-item option">
-                                            <mat-checkbox formControlName="delivery">
-                                                <h6> Abierto solo para entregar pedidos</h6>
-                                            </mat-checkbox>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6" formGroupName="type_of_operation">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <h5>Tipo de Operación</h5>
-                                        </li>
-                                        <li class="list-group-item option">
-                                            <mat-checkbox formControlName="owner_delivery">
-                                                <h6>Envio a domicilio propio</h6>
-                                            </mat-checkbox>
-                                        </li>
-                                        <li class="list-group-item option">
-                                            <mat-checkbox formControlName="app_delivery">
-                                                <h6>Envio a domicilio por plataformas como Uber y Rappi</h6>
-                                            </mat-checkbox>
-                                        </li>
-                                        <li class="list-group-item option">
-                                            <mat-checkbox formControlName="client_delivery">
-                                                <h6>Ponerse de acuerdo para la entrega</h6>
-                                            </mat-checkbox>
-                                        </li>
-                                        <li class="list-group-item option">
-                                            <mat-checkbox formControlName="just_to_go">
-                                                <h6>Solo para llevar</h6>
-                                            </mat-checkbox>
-                                        </li>
-                                        <li class="list-group-item option">
-                                            <mat-checkbox formControlName="pre_order">
-                                                <h6>Pedidos anticipados</h6>
-                                            </mat-checkbox>
-                                        </li>
-                                        <li class="list-group-item option">
-                                            <mat-checkbox formControlName="pick_up_shop">
-                                                <h6>Recoger en tienda</h6>
-                                            </mat-checkbox>
-                                        </li>
-                                        <li class="list-group-item option">
-                                            <input matInput placeholder="Otro" type="text" formControlName="other">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>Breve descripcion del negocio</label>
-                                    <mat-form-field class="example-full-width">
-                                        <textarea matInput formControlName="description"></textarea>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="save()">Guardar</button>
-                            <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Localiza tu negocio</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <agm-map *ngIf="(location$ | async) as location" [latitude]="location?.latitude" [longitude]="location?.longitude" [zoom]="14">
+                                    <agm-marker [latitude]="location?.latitude" [longitude]="location?.longitude" [markerDraggable]="true" (dragEnd)="dragEnd($event)"></agm-marker>
+                                </agm-map>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Direccion" type="text" formControlName="address">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Ciudad" type="text" formControlName="city">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Estado" type="text" formControlName="state">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Codigo Postal" type="text" formControlName="code_postal">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Operacion y Servicio</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6" formGroupName="service" s>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <h5>Servicio</h5>
+                                    </li>
+                                    <li class="list-group-item option">
+                                        <mat-checkbox formControlName="closed">
+                                            <h6> Cerrado indefinidamente</h6>
+                                        </mat-checkbox>
+                                    </li>
+                                    <li class="list-group-item option">
+                                        <mat-checkbox formControlName="opened">
+                                            <h6> Abierto Normal</h6>
+                                        </mat-checkbox>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <mat-checkbox formControlName="limited_open">
+                                            <h6> Abierto en horarios limitados</h6>
+                                        </mat-checkbox>
+                                    </li>
+                                    <li class="list-group-item option">
+                                        <mat-checkbox formControlName="opened_without_spaces">
+                                            <h6> Abierto con espacios reducidos</h6>
+                                        </mat-checkbox>
+                                    </li>
+                                    <li class="list-group-item option">
+                                        <mat-checkbox formControlName="delivery">
+                                            <h6> Abierto solo para entregar pedidos</h6>
+                                        </mat-checkbox>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6" formGroupName="type_of_operation">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <h5>Tipo de Operación</h5>
+                                    </li>
+                                    <li class="list-group-item option">
+                                        <mat-checkbox formControlName="owner_delivery">
+                                            <h6>Envio a domicilio propio</h6>
+                                        </mat-checkbox>
+                                    </li>
+                                    <li class="list-group-item option">
+                                        <mat-checkbox formControlName="app_delivery">
+                                            <h6>Envio a domicilio por plataformas como Uber y Rappi</h6>
+                                        </mat-checkbox>
+                                    </li>
+                                    <li class="list-group-item option">
+                                        <mat-checkbox formControlName="client_delivery">
+                                            <h6>Ponerse de acuerdo para la entrega</h6>
+                                        </mat-checkbox>
+                                    </li>
+                                    <li class="list-group-item option">
+                                        <mat-checkbox formControlName="just_to_go">
+                                            <h6>Solo para llevar</h6>
+                                        </mat-checkbox>
+                                    </li>
+                                    <li class="list-group-item option">
+                                        <mat-checkbox formControlName="pre_order">
+                                            <h6>Pedidos anticipados</h6>
+                                        </mat-checkbox>
+                                    </li>
+                                    <li class="list-group-item option">
+                                        <mat-checkbox formControlName="pick_up_shop">
+                                            <h6>Recoger en tienda</h6>
+                                        </mat-checkbox>
+                                    </li>
+                                    <li class="list-group-item option">
+                                        <input matInput placeholder="Otro" type="text" formControlName="other">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Descripción</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Breve descripcion del negocio</label>
+                                <mat-form-field class="example-full-width">
+                                    <textarea matInput formControlName="description"></textarea>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="save()">Guardar</button>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>
 </div>
-
