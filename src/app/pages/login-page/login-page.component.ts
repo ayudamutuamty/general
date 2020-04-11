@@ -12,18 +12,20 @@ export class LoginPageComponent implements OnInit {
     password: string;
     errorMessage: string;
 
-    constructor(private authService: AuthService, private router: Router) {}
+    constructor(private authService: AuthService, private router: Router) {
+        
+    }
 
     ngOnInit() {
         this.errorMessage = '';
-        if (this.authService.isLogged()) {
+        if (this.authService.user) {
             this.navigateTo();
         }
     }
 
     public async login(email: string, password: string) {
         try {
-            const url = (await this.authService.mockLogin(
+            const url = (await this.authService.login(
                 email,
                 password,
             )) as string;
@@ -35,7 +37,7 @@ export class LoginPageComponent implements OnInit {
     }
 
     public navigateTo(url?: string) {
-        url = url || 'nav';
+        url = url || 'app';
         this.router.navigate([url], { replaceUrl: true });
     }
 }

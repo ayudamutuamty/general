@@ -2,16 +2,15 @@ import { Route, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 export interface NavRoute extends Route {
-    path?: string;
-    icon?: string;
-    group?: string;
-    groupedNavRoutes?: NavRoute[];
+    path ? : string;
+    icon ? : string;
+    group ? : string;
+    groupedNavRoutes ? : NavRoute[];
 }
 
-export const sideNavPath = 'nav';
+export const sideNavPath = 'app';
 
-export const navRoutes: NavRoute[] = [
-    {
+export const navRoutes: NavRoute[] = [{
         data: { title: 'Home' },
         icon: 'home',
         path: 'home',
@@ -24,6 +23,25 @@ export const navRoutes: NavRoute[] = [
         path: '',
         redirectTo: 'home',
         pathMatch: 'full',
+    },
+    {
+        data: { title: 'Perfil' },
+        icon: 'menu',
+        group: '',
+        path: 'profile',
+        loadChildren: () =>
+            import('./pages/profile-page/profile-page.module').then(
+                m => m.ProfilePageModule,
+            ),
+    }, {
+        data: { title: 'Negocios' },
+        icon: 'menu',
+        group: '',
+        path: 'business',
+        loadChildren: () =>
+            import('./pages/business-page/business-page.module').then(
+                m => m.BusinessPageModule,
+            ),
     },
 ];
 

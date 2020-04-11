@@ -1,0 +1,27 @@
+<div class="signup-page" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="50px">
+    <div class="logo-container" fxFlexAlign="center">
+        <app-logo></app-logo>
+    </div>
+    <mat-card fxFlexAlign="center">
+        <mat-card-title>
+           Registrarse
+        </mat-card-title>
+        <mat-card-content>
+            <form (keyup.enter)="signup(email, password)">
+                <mat-form-field class="signup-field">
+                    <input matInput placeholder="Correo" name="email" [(ngModel)]="email" type="email" autocomplete="username email" />
+                </mat-form-field>
+                <mat-form-field class="signup-field">
+                    <input matInput placeholder="Contraseña" name="password" [(ngModel)]="password" type="password" autocomplete="current-password" />
+                </mat-form-field>
+            </form>
+            <mat-error [textContent]="errorMessage"></mat-error>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" class="signup-field" type="submit" (click)="signup(email, password)">
+                Registrarse
+            </button>
+
+        </mat-card-actions>
+    </mat-card>
+</div>

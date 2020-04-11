@@ -1,30 +1,30 @@
 import { Injectable } from '@angular/core';
-import { CrudService } from '../core/services/http/crud.service';
 import { HttpClient } from '@angular/common/http';
 import { StorageService } from '../core/services/storage/storage.service';
 import { StorageKey } from '../core/services/storage/storage.model';
-const { AUTH_TOKEN } = StorageKey;
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
+import * as firebase from 'firebase/app';
+
 
 @Injectable({
     providedIn: 'root',
 })
-@Injectable({
-    providedIn: 'root',
-})
-export class AuthService extends CrudService {
-    endpoint = 'auth';
-    token: string;
+export class AuthService {
     redirectUrl: string;
+    user: Observable < firebase.User > ;
 
-    constructor(http: HttpClient, private storage: StorageService) {
-        super(http);
-        this.token = this.storage.read(AUTH_TOKEN) || '';
+   
+
+    constructor(
+        private afAuth: AngularFireAuth) {
+        this.user = afAuth.authState;
+
     }
 
     public async login(email: string, password: string) {
         try {
-            this.token = await this.post({ email, password });
-            this.storage.save(AUTH_TOKEN, this.token);
+            const token = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
             return this.redirectUrl;
         } catch (error) {
             console.error('Error during login request', error);
@@ -32,31 +32,21 @@ export class AuthService extends CrudService {
         }
     }
 
-    public async mockLogin(email: string, password: string) {
+
+    public async signup(email: string, password: string) {
         try {
-            if (!(email === 'user' && password === 'user')) {
-                throw new Error(
-                    'When using mockLogin, login with credentials: \nemail: user\npassword:user',
-                );
-            }
-            this.token = 'user';
-            this.storage.save(StorageKey.AUTH_TOKEN, this.token);
+            const token = await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
             return this.redirectUrl;
-        } catch (e) {
-            return Promise.reject(e.message);
+        } catch (error) {
+            console.error('Error during login request', error);
+            return Promise.reject(error);
         }
     }
 
-    public getToken(): string {
-        return this.token;
-    }
 
     public logout() {
-        this.token = '';
-        this.storage.remove(AUTH_TOKEN);
+        this.afAuth.auth.signOut();
     }
 
-    public isLogged(): boolean {
-        return this.token.length > 0;
-    }
+
 }

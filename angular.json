@@ -1,142 +1,179 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "matFortyTwo": {
-      "root": "",
-      "sourceRoot": "src",
-      "projectType": "application",
-      "prefix": "app",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/matFortyTwo",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss",
-                "src/theme.scss",
-                "src/app/core/styles/nav-styles.scss"
-            ],
-            "scripts": [],
-            "es5BrowserSupport": true
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects":
+    {
+        "covid19":
+        {
+            "root": "",
+            "sourceRoot": "src",
+            "projectType": "application",
+            "prefix": "app",
+            "schematics":
+            {
+                "@schematics/angular:component":
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                    "style": "scss"
                 }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
+            },
+            "architect":
+            {
+                "build":
                 {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options":
+                    {
+                        "aot": true,
+                        "outputPath": "dist/covid19",
+                        "index": "src/index.html",
+                        "main": "src/main.ts",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "src/tsconfig.app.json",
+                        "assets": [
+                            "src/favicon.ico",
+                            "src/assets"
+                        ],
+                        "styles": [
+                            "src/styles.scss",
+                            "src/theme.scss",
+                            "src/app/core/styles/nav-styles.scss",
+                            "node_modules/bootstrap/scss/bootstrap.scss",
+                            "node_modules/font-awesome/scss/font-awesome.scss"
+
+                        ],
+                        "scripts": [],
+                        "es5BrowserSupport": true
+                    },
+                    "configurations":
+                    {
+                        "production":
+                        {
+                            "fileReplacements": [
+                            {
+                                "replace": "src/environments/environment.ts",
+                                "with": "src/environments/environment.prod.ts"
+                            }],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                            {
+                                "type": "initial",
+                                "maximumWarning": "2mb",
+                                "maximumError": "5mb"
+                            },
+                            {
+                                "type": "anyComponentStyle",
+                                "maximumWarning": "6kb"
+                            }]
+                        }
+                    }
+                },
+                "serve":
+                {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options":
+                    {
+                        "browserTarget": "covid19:build"
+                    },
+                    "configurations":
+                    {
+                        "production":
+                        {
+                            "browserTarget": "covid19:build:production"
+                        }
+                    }
+                },
+                "extract-i18n":
+                {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options":
+                    {
+                        "browserTarget": "covid19:build"
+                    }
+                },
+                "test":
+                {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options":
+                    {
+                        "main": "src/test.ts",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "src/tsconfig.spec.json",
+                        "karmaConfig": "src/karma.conf.js",
+                        "styles": [
+                            "src/styles.scss"
+                        ],
+                        "scripts": [],
+                        "assets": [
+                            "src/favicon.ico",
+                            "src/assets"
+                        ]
+                    }
+                },
+                "lint":
+                {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options":
+                    {
+                        "tsConfig": [
+                            "src/tsconfig.app.json",
+                            "src/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
                 }
-              ]
             }
-          }
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "matFortyTwo:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "matFortyTwo:build:production"
+        "covid19-e2e":
+        {
+            "root": "e2e/",
+            "projectType": "application",
+            "prefix": "",
+            "architect":
+            {
+                "e2e":
+                {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options":
+                    {
+                        "protractorConfig": "e2e/protractor.conf.js",
+                        "devServerTarget": "covid19:serve"
+                    },
+                    "configurations":
+                    {
+                        "production":
+                        {
+                            "devServerTarget": "covid19:serve:production"
+                        }
+                    }
+                },
+                "lint":
+                {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options":
+                    {
+                        "tsConfig": "e2e/tsconfig.e2e.json",
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                }
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "matFortyTwo:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": [],
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ]
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
-      }
     },
-    "matFortyTwo-e2e": {
-      "root": "e2e/",
-      "projectType": "application",
-      "prefix": "",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "matFortyTwo:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "matFortyTwo:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
+    "defaultProject": "covid19",
+    "cli":
+    {
+        "analytics": "866876ad-c299-4bb3-879e-cb5b14576179"
     }
-  },
-  "defaultProject": "matFortyTwo"
 }

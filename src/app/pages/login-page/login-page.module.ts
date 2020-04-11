@@ -9,7 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
-
+import {MatListModule} from '@angular/material/list';
 @NgModule({
     declarations: [LoginPageComponent],
     imports: [
@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
         MatButtonModule,
         FlexLayoutModule,
         FormsModule,
+        MatListModule
     ],
 })
 export class LoginPageModule {}

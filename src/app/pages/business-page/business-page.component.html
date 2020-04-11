@@ -1,0 +1,43 @@
+<div class="main-content">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Negocios</li>
+        </ol>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['new']">Nuevo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['distance']">Distancia</a>
+                    </li>
+                </ul>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                Aqui iran los filtros
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card" *ngFor="let business of (businesses$ | async)" (click)="go(business.id)">
+                            <div class="card-body">
+                                <h3> {{business.name}}
+                                </h3>
+                                <h6 class="card-subtitle mb-2 text-muted">{{business.core_business}}</h6>
+                                <p class="card-text">{{business.description}}</p>
+                                <a [href]="business.facebook" class="fa fa-facebook"></a><a [href]="business.instragram" class="fa fa-instagram"></a>
+                                <a [href]="business.website" class="fa fa-info">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

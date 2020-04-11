@@ -46,31 +46,4 @@ describe('AuthGuard', () => {
         expect(guard).toBeTruthy();
     });
 
-    describe('canActivate', () => {
-        it('set the redirectUrl to null and return true', () => {
-            spyOn(service, 'isLogged').and.returnValue(true);
-
-            expect(
-                guard.canActivate(
-                    {} as ActivatedRouteSnapshot,
-                    { url: 'fakeUrl' } as RouterStateSnapshot,
-                ),
-            ).toEqual(true);
-            expect(service.redirectUrl).toBeNull();
-        });
-
-        it('should set the redirectUrl, call router.navigate, and return false', () => {
-            spyOn(router, 'navigate');
-            spyOn(service, 'isLogged').and.returnValue(false);
-
-            expect(
-                guard.canActivate(
-                    {} as ActivatedRouteSnapshot,
-                    { url: 'fakeUrl' } as RouterStateSnapshot,
-                ),
-            ).toEqual(false);
-            expect(service.redirectUrl).toEqual('fakeUrl');
-            expect(router.navigate).toHaveBeenCalledWith(['']);
-        });
-    });
 });

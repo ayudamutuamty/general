@@ -11,12 +11,23 @@ import { AuthGuard } from './auth/auth.guard';
 import { CustomRouteReuseStrategy } from './core/nav-reuse-strategy';
 import { NavGuard } from './core/nav.guard';
 
-const routes: Routes = [
-    {
+const routes: Routes = [{path: 'business',loadChildren: () =>
+                import('./pages/business-page/business-page.module').then(
+                    m => m.BusinessPageModule,
+                ),},{path: 'profile',loadChildren: () =>
+                import('./pages/profile-page/profile-page.module').then(
+                    m => m.ProfilePageModule,
+                ),},{
         path: 'login',
         loadChildren: () =>
             import('./pages/login-page/login-page.module').then(
                 m => m.LoginPageModule,
+            ),
+    }, {
+        path: 'signup',
+        loadChildren: () =>
+            import('./pages/signup-page/signup-page.module').then(
+                m => m.SignupPageModule,
             ),
     },
     {

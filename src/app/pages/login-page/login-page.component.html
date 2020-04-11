@@ -4,24 +4,28 @@
     </div>
     <mat-card fxFlexAlign="center">
         <mat-card-title>
-            Login to MatFortyTwo
+            Iniciar
         </mat-card-title>
         <mat-card-content>
             <form (keyup.enter)="login(email, password)">
                 <mat-form-field class="login-field">
-                    <input matInput placeholder="Email" name="email" [(ngModel)]="email" type="email" autocomplete="username email"/>
+                    <input matInput placeholder="Correo" name="email" [(ngModel)]="email" type="email" autocomplete="username email" />
                 </mat-form-field>
                 <mat-form-field class="login-field">
-                    <input matInput placeholder="Password" name="password" [(ngModel)]="password" type="password" autocomplete="current-password"/>
+                    <input matInput placeholder="Contraseña" name="password" [(ngModel)]="password" type="password" autocomplete="current-password" />
                 </mat-form-field>
             </form>
             <mat-error [textContent]="errorMessage"></mat-error>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary"
-                    class="login-field" (click)="login(email, password)" type="submit">
-                Login
-            </button>
+            <mat-list>
+                <mat-list-item><button mat-raised-button class="button-login" color="primary" class="login-field" type="submit" (click)="login(email, password)">
+                        Inicio
+                    </button></mat-list-item>
+                <mat-list-item><a mat-raised-button color="primary" class="login-field" type="submit" [routerLink]="['/signup']">
+                        Registrarse
+                    </a></mat-list-item>
+            </mat-list>
         </mat-card-actions>
     </mat-card>
 </div>
