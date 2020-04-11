@@ -132,7 +132,7 @@
                         </div>
                     </div>
                 </div>
-                <button  *ngIg="current_user.uid == owner.uid"mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="delete()">Borrar</button>
+                <button  *ngIf="current_user && business && current_user.uid == business.user_id" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="delete()">Borrar</button>
             </div>
         </div>
     </div>

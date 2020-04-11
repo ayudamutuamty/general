@@ -77,6 +77,7 @@ export class NewComponent implements OnInit {
         console.log(this.current_location);
         business.location = new firebase.firestore.GeoPoint(this.current_location.latitude, this.current_location.longitude);
         business.user = this.us.getUserReference(user.uid);
+        business.user_id = user.uid;
         let res = await this.bs.create(business);
 
         this.router.navigateByUrl('/app/negocios')

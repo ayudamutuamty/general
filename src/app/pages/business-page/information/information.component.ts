@@ -4,6 +4,7 @@ import { Business } from '../../../core/model/business';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../core/model/user';
 import { AuthService } from '../../../auth/auth.service';
+import { take} from 'rxjs/operators';
 
 @Component({
     selector: 'app-information',
@@ -17,8 +18,9 @@ export class InformationComponent implements OnInit {
 
     latitude: number;
     longitude: number;
-    owner: any;
     current_user: any;
+    owner_user: any;
+
 
     constructor(private businessService: BusinessService,
         private activatedRoute: ActivatedRoute,
@@ -37,14 +39,12 @@ export class InformationComponent implements OnInit {
         this.business = await this.businessService.get(business_id);
         this.longitude = this.business.location.longitude;
         this.latitude = this.business.location.latitude;
-        this.current_user = await this.authService.user.toPromise();
-        this.business.user.get().then(doc=> {
-            if(doc.exists){
-                this.owner= doc.data();
-            }
-        });
+        this.current_user = await this.authService.user.pipe(take(1)).toPromise();
+                console.log(this.current_user);
 
-        
+        this.owner_user = (await this.business.user.get()).data();
+        console.log(this.owner_user);
+
 
     }
 

@@ -10,6 +10,7 @@ import { DistanceComponent } from './distance/distance.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -17,10 +18,11 @@ import { AgmCoreModule } from '@agm/core';
 import { environment } from '../../../environments/environment';
 import { InformationComponent } from './information/information.component';
 import { SortDistancePipe } from './pipes/sort-distance.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
     declarations: [BusinessPageComponent, NewComponent, 
-    DistanceComponent, InformationComponent, SortDistancePipe],
+    DistanceComponent, InformationComponent, SortDistancePipe, FilterPipe],
     imports: [
         CommonModule,
         BusinessPageRoutingModule,
@@ -30,6 +32,7 @@ import { SortDistancePipe } from './pipes/sort-distance.pipe';
         MatInputModule,
         MatFormFieldModule,
         MatCheckboxModule,
+        MatSliderModule,
         AgmCoreModule.forRoot({
             apiKey: environment.google.apiKey
         })

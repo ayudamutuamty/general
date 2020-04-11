@@ -7,6 +7,8 @@ export interface Business {
     id: string;
     phone: string;
     user: firebase.firestore.DocumentReference ;
+        user_id?: string;
+
     name: string;
     core_business: string;
     code_postal: string;
