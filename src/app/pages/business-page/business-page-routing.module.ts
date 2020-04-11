@@ -8,18 +8,18 @@ import { InformationComponent } from './information/information.component';
 
 
 const routes: Routes = [{
-        path: 'distance',
+        path: 'distancia',
         component: DistanceComponent
     }, {
-        path: 'new',
+        path: 'nuevo',
         component: NewComponent
     },
     {
         path: '',
         component: BusinessPageComponent,
-        data: { shouldReuse: true, key: 'business' }
+        data: { shouldReuse: true, key: 'negocios' }
     }, {
-        path: ':business_id/information',
+        path: ':business_id',
         component: InformationComponent
 
     }

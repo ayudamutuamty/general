@@ -22,7 +22,7 @@ export class BusinessPageComponent implements OnInit {
     }
 
     go(business_id: string) {
-        this.router.navigateByUrl('/app/business/' + business_id + '/information');
+        this.router.navigateByUrl('/app/negocios/' + business_id );
     }
 
 }

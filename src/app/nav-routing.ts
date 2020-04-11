@@ -13,7 +13,7 @@ export const sideNavPath = 'app';
 export const navRoutes: NavRoute[] = [{
         data: { title: 'Home' },
         icon: 'home',
-        path: 'home',
+        path: 'inicio',
         loadChildren: () =>
             import('./pages/home-page/home-page.module').then(
                 m => m.HomePageModule,
@@ -21,23 +21,23 @@ export const navRoutes: NavRoute[] = [{
     },
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'inicio',
         pathMatch: 'full',
     },
     {
         data: { title: 'Perfil' },
-        icon: 'menu',
+        icon: 'person_pin',
         group: '',
-        path: 'profile',
+        path: 'perfil',
         loadChildren: () =>
             import('./pages/profile-page/profile-page.module').then(
                 m => m.ProfilePageModule,
             ),
     }, {
         data: { title: 'Negocios' },
-        icon: 'menu',
+        icon: 'business',
         group: '',
-        path: 'business',
+        path: 'negocios',
         loadChildren: () =>
             import('./pages/business-page/business-page.module').then(
                 m => m.BusinessPageModule,

@@ -18,13 +18,13 @@ const routes: Routes = [{path: 'business',loadChildren: () =>
                 import('./pages/profile-page/profile-page.module').then(
                     m => m.ProfilePageModule,
                 ),},{
-        path: 'login',
+        path: 'sesion',
         loadChildren: () =>
             import('./pages/login-page/login-page.module').then(
                 m => m.LoginPageModule,
             ),
     }, {
-        path: 'signup',
+        path: 'registrarse',
         loadChildren: () =>
             import('./pages/signup-page/signup-page.module').then(
                 m => m.SignupPageModule,
@@ -39,7 +39,7 @@ const routes: Routes = [{path: 'business',loadChildren: () =>
     },
     {
         path: '**',
-        redirectTo: 'login',
+        redirectTo: 'sesion',
     },
 ];
 
