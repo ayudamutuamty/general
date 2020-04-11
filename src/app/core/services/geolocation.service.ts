@@ -23,4 +23,19 @@ export class GeolocationService {
             params: params
         });
     }
+
+    getLocation(): Observable < { latitude: number, longitude: number } > {
+        return Observable.create(observe => {
+
+            navigator.geolocation.getCurrentPosition(position => {
+                observe.next({
+                    longitude: position.coords.longitude,
+                    latitude: position.coords.latitude
+                })
+
+                observe.complete();
+            })
+        })
+    }
+
 }

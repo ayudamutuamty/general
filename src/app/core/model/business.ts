@@ -15,6 +15,7 @@ export interface Business {
     city: string;
     email: string;
     location: firebase.firestore.GeoPoint;
+    distance?: number;
     description: string;
     type_of_operation: {
             owner_delivery: boolean;
