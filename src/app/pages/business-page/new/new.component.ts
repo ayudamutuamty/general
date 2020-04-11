@@ -7,10 +7,9 @@ import { Business } from '../../../core/model/business';
 import { User } from '../../../core/model/user';
 import { UserService } from '../../../core/services/user.service';
 import { take } from 'rxjs/operators';
-import { AgmMarker } from '@agm/core';
 import * as firebase from 'firebase/app';
 import { GeolocationService } from '../../../core/services/geolocation.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-new',
@@ -20,9 +19,8 @@ import {Router} from '@angular/router';
 })
 export class NewComponent implements OnInit {
 
-    location$: Observable < { latitud: number, longitude: number } > ;
-
-    @ViewChild(AgmMarker) agmMarker: AgmMarker;
+    location$: Observable < { latitude: number, longitude: number } > ;
+    current_location: { latitude: number, longitude: number };
 
     businessForm: FormGroup = new FormGroup({
         phone: new FormControl(),
@@ -75,21 +73,29 @@ export class NewComponent implements OnInit {
 
         let user = await this.authService.user.pipe(take(1)).toPromise();
         let business: Business = this.businessForm.value;
-        business.location = new firebase.firestore.GeoPoint(this.agmMarker.latitude, this.agmMarker.longitude);
+
+        console.log(this.current_location);
+        business.location = new firebase.firestore.GeoPoint(this.current_location.latitude, this.current_location.longitude);
         business.user = this.us.getUserReference(user.uid);
         let res = await this.bs.create(business);
 
-                this.router.navigateByUrl('/app/business')
+        this.router.navigateByUrl('/app/negocios')
 
 
 
     }
 
 
-    getLocation(): Observable < { latitud: number, longitude: number } > {
+    getLocation(): Observable < { latitude: number, longitude: number } > {
         return Observable.create(observe => {
 
             navigator.geolocation.getCurrentPosition(position => {
+
+                this.current_location = {
+                    longitude: position.coords.longitude,
+                    latitude: position.coords.latitude
+                };
+
                 observe.next({
                     longitude: position.coords.longitude,
                     latitude: position.coords.latitude
@@ -103,6 +109,12 @@ export class NewComponent implements OnInit {
 
 
     dragEnd(event) {
+
+        this.current_location = {
+            longitude: event.coords.lng,
+            latitude: event.coords.lat
+        };
+
         this.geolocationService.getAddress(event.coords.lat, event.coords.lng)
             .subscribe(address => this.getFormatAddress(address))
 

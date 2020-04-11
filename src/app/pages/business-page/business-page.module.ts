@@ -16,9 +16,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from '../../../environments/environment';
 import { InformationComponent } from './information/information.component';
+import { SortDistancePipe } from './pipes/sort-distance.pipe';
 
 @NgModule({
-    declarations: [BusinessPageComponent, NewComponent, DistanceComponent, InformationComponent],
+    declarations: [BusinessPageComponent, NewComponent, 
+    DistanceComponent, InformationComponent, SortDistancePipe],
     imports: [
         CommonModule,
         BusinessPageRoutingModule,

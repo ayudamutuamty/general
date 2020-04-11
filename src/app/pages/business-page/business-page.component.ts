@@ -3,22 +3,29 @@ import { Business } from '../../core/model/business';
 import { Observable } from 'rxjs';
 import { BusinessService } from '../../core/services/business.service';
 import { Router } from '@angular/router';
+import { GeolocationService } from '../../core/services/geolocation.service';
 
 @Component({
     selector: 'app-business-page',
     templateUrl: './business-page.component.html',
     styleUrls: ['./business-page.component.scss'],
-    providers: [BusinessService]
+    providers: [BusinessService, GeolocationService]
 })
 export class BusinessPageComponent implements OnInit {
 
     businesses$: Observable < Business[] > ;
 
     constructor(private businessService: BusinessService,
-        private router: Router) {}
+        private router: Router, private geo: GeolocationService) {}
 
     ngOnInit(): void {
-        this.businesses$ = this.businessService.getAll();
+        this.initBusiness();
+    }
+
+    async initBusiness(){
+        let location = await this.geo.getLocation().toPromise();
+        this.businesses$ = this.businessService.getAllWithDistance(location.latitude, location.longitude);
+
     }
 
     go(business_id: string) {
