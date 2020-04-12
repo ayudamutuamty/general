@@ -1,7 +1,15 @@
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/app/negocios']">Negocios</a></li>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/app/negocios']">Negocios</a></li>
         <li class="breadcrumb-item active" aria-current="page">Distancia</li>
-
-  </ol>
+    </ol>
 </nav>
+<agm-map *ngIf="latitude && longitude" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+    <agm-marker *ngFor="let business of (businesses$ | async) | filter: { max_distance : distance }" [latitude]="business.location.latitude" [longitude]="business.location.longitude">
+        <agm-info-window>
+            <div>{{m.content}}</div>
+        </agm-info-window>
+    </agm-marker>
+    <agm-circle [latitude]="latitude" [longitude]="longitude" [radius]="radius" [fillColor]="'red'" [editable]="false">
+    </agm-circle>
+</agm-map>

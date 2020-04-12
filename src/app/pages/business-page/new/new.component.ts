@@ -71,14 +71,14 @@ export class NewComponent implements OnInit {
 
     async save() {
 
-        let user = await this.authService.user.pipe(take(1)).toPromise();
-        let business: Business = this.businessForm.value;
+        const user = await this.authService.user.pipe(take(1)).toPromise();
+        const business: Business = this.businessForm.value;
 
         console.log(this.current_location);
         business.location = new firebase.firestore.GeoPoint(this.current_location.latitude, this.current_location.longitude);
         business.user = this.us.getUserReference(user.uid);
         business.user_id = user.uid;
-        let res = await this.bs.create(business);
+        const res = await this.bs.create(business);
 
         this.router.navigateByUrl('/app/negocios')
 
@@ -126,13 +126,14 @@ export class NewComponent implements OnInit {
     getFormatAddress(address) {
 
         if (address.results && address.results.length > 0) {
-            if (address.results[0].formatted_address)
+            if (address.results[0].formatted_address) {
                 this.businessForm.patchValue({
                     address: address.results[0].formatted_address
                 })
+            }
 
 
-            for (let comp of address.results[0].address_components) {
+            for (const comp of address.results[0].address_components) {
                 if (comp.types[0] == 'postal_code') {
                     this.businessForm.patchValue({
                         code_postal: comp.long_name

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class GeolocationService {
 
-    private url: string = "https://maps.googleapis.com/maps/api/geocode/json";
+    private url = 'https://maps.googleapis.com/maps/api/geocode/json';
 
     constructor(private http: HttpClient) {}
 
@@ -20,7 +20,7 @@ export class GeolocationService {
         params = params.set('key', environment.google.apiKey);
 
         return this.http.get < any > (this.url, {
-            params: params
+            params
         });
     }
 

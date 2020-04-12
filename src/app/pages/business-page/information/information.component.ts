@@ -35,7 +35,7 @@ export class InformationComponent implements OnInit {
 
 
     async getBusiness() {
-        let business_id: string = this.activatedRoute.snapshot.paramMap.get('business_id');
+        const business_id: string = this.activatedRoute.snapshot.paramMap.get('business_id');
         this.business = await this.businessService.get(business_id);
         this.longitude = this.business.location.longitude;
         this.latitude = this.business.location.latitude;
@@ -50,7 +50,7 @@ export class InformationComponent implements OnInit {
 
 
      delete(){
-                 let business_id: string = this.activatedRoute.snapshot.paramMap.get('business_id');
+                 const business_id: string = this.activatedRoute.snapshot.paramMap.get('business_id');
 
         this.businessService.delete(business_id)
         this.router.navigateByUrl('/app/negocios')

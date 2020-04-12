@@ -41,7 +41,7 @@ export class ProfilePageComponent implements OnInit {
     }
 
     async initUser() {
-        let current_user = await this.authService.user.pipe(take(1)).toPromise();
+        const current_user = await this.authService.user.pipe(take(1)).toPromise();
         this.userForm.patchValue({
             email: current_user.email,
             uid: current_user.uid
@@ -49,16 +49,18 @@ export class ProfilePageComponent implements OnInit {
 
         let user_fs: User = await this.userService.get(current_user.uid);
 
-        if (user_fs == null)
+        if (user_fs == null) {
             user_fs = await this.userService.create(this.userForm.value);
-        else
+        }
+        else {
             this.userForm.patchValue(user_fs);
+        }
 
     }
 
 
     async save() {
-    	let user: User= await this.userService.create(this.userForm.value);
+    	const user: User= await this.userService.create(this.userForm.value);
     }
 
 

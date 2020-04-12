@@ -14,7 +14,7 @@ import { GeolocationService } from '../../core/services/geolocation.service';
 export class BusinessPageComponent implements OnInit {
 
     businesses$: Observable < Business[] > ;
-    public max_distance: number=1;
+    public max_distance=5;
 
 
 
@@ -31,7 +31,7 @@ export class BusinessPageComponent implements OnInit {
     }
 
     async initBusiness() {
-        let location = await this.geo.getLocation().toPromise();
+        const location = await this.geo.getLocation().toPromise();
         this.businesses$ = this.businessService.getAllWithDistance(location.latitude, location.longitude);
 
     }

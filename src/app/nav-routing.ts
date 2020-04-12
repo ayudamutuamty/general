@@ -43,6 +43,16 @@ export const navRoutes: NavRoute[] = [{
                 m => m.BusinessPageModule,
             ),
     },
+    {
+        data: { title: 'Analytics' },
+        icon: 'graphic_eq',
+        group: '',
+        path: 'analisis',
+        loadChildren: () =>
+            import('./pages/analytics-page/analytics-page.module').then(
+                m => m.AnalyticsPageModule,
+            ),
+    },
 ];
 
 @Injectable({

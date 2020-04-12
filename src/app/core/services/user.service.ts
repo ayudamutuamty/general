@@ -14,10 +14,10 @@ export class UserService {
     create(user: User): Promise < User > {
         return new Promise < User > ((resolve, reject) => {
             this.firestore
-                .collection("users")
+                .collection('users')
                 .doc(user.uid)
                 .set(user)
-                .then(res => { return resolve(user) }, err => reject(err));
+                .then(res => resolve(user), err => reject(err));
         });
 
 
@@ -26,10 +26,10 @@ export class UserService {
 
     get(uuid: string): Promise < User > {
 
-        let docRef = this.firestore.collection("users").doc(uuid);
+        const docRef = this.firestore.collection('users').doc(uuid);
 
         return new Promise < User > ((resolve, reject) => {
-            this.firestore.collection("users").doc(uuid).ref.get().then(function(doc) {
+            this.firestore.collection('users').doc(uuid).ref.get().then(function(doc) {
                 if (doc.exists) {
                     resolve(doc.data() as User);
                 } else {
@@ -38,7 +38,7 @@ export class UserService {
 
                 }
             }).catch(function(error) {
-                reject("Error getting document:" + error);
+                reject('Error getting document:' + error);
             });
 
         })

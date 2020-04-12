@@ -39,10 +39,10 @@ export class BusinessService {
     getAllWithDistance(latitude: number, longitude: number): Observable < Business[] > {
         return this.getAll().pipe(
             map(results => {
-                let businesses: Business[] = [];
+                const businesses: Business[] = [];
 
-                for (let res of results) {
-                    let business: Business = res;
+                for (const res of results) {
+                    const business: Business = res;
                     business.distance = this.distance(latitude, longitude,
                         business.location.latitude, business.location.longitude);
                     businesses.push(business);
@@ -56,10 +56,10 @@ export class BusinessService {
 
     get(id: string): Promise < Business > {
 
-        let docRef = this.firestore.collection("businesses").doc(id);
+        const docRef = this.firestore.collection('businesses').doc(id);
 
         return new Promise < Business > ((resolve, reject) => {
-            this.firestore.collection("businesses").doc(id).ref.get().then(function(doc) {
+            this.firestore.collection('businesses').doc(id).ref.get().then(function(doc) {
                 if (doc.exists) {
                     resolve(doc.data() as Business);
                 } else {
@@ -68,7 +68,7 @@ export class BusinessService {
 
                 }
             }).catch(function(error) {
-                reject("Error getting document:" + error);
+                reject('Error getting document:' + error);
             });
 
         })
@@ -77,16 +77,16 @@ export class BusinessService {
     }
 
     delete(id: string) {
-        let docRef = this.firestore.collection("businesses").doc(id);
+        const docRef = this.firestore.collection('businesses').doc(id);
         docRef.delete();
 
     }
 
 
     private distance(lat1: number, lon1: number, lat2: number, lon2: number) {
-        let p = 0.017453292519943295; // Math.PI / 180
-        let c = Math.cos;
-        let a = 0.5 - c((lat2 - lat1) * p) / 2 +
+        const p = 0.017453292519943295; // Math.PI / 180
+        const c = Math.cos;
+        const a = 0.5 - c((lat2 - lat1) * p) / 2 +
             c(lat1 * p) * c(lat2 * p) *
             (1 - c((lon2 - lon1) * p)) / 2;
 

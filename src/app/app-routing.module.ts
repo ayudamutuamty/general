@@ -11,7 +11,10 @@ import { AuthGuard } from './auth/auth.guard';
 import { CustomRouteReuseStrategy } from './core/nav-reuse-strategy';
 import { NavGuard } from './core/nav.guard';
 
-const routes: Routes = [{path: 'business',loadChildren: () =>
+const routes: Routes = [{path: 'analytics',loadChildren: () =>
+                import('./pages/analytics-page/analytics-page.module').then(
+                    m => m.AnalyticsPageModule,
+                ),},{path: 'business',loadChildren: () =>
                 import('./pages/business-page/business-page.module').then(
                     m => m.BusinessPageModule,
                 ),},{path: 'profile',loadChildren: () =>
