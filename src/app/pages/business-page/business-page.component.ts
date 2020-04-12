@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { BusinessService } from '../../core/services/business.service';
 import { Router } from '@angular/router';
 import { GeolocationService } from '../../core/services/geolocation.service';
+import {FormGroup, FormControl} from '@angular/forms';
+
 
 @Component({
     selector: 'app-business-page',
@@ -15,6 +17,10 @@ export class BusinessPageComponent implements OnInit {
 
     businesses$: Observable < Business[] > ;
     public max_distance=5;
+
+    filterForm: FormGroup= new FormGroup({
+        core_business: new FormControl()
+    })
 
 
 

@@ -12,20 +12,26 @@
                         <a class="btn btn-success nav-link" [routerLink]="['nuevo']">Nuevo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-success nav-link" [routerLink]="['distancia']" [queryParams]="{distance: max_distance}">Distancia</a>
+                        <a class="btn btn-success nav-link" [routerLink]="['distancia']" [queryParams]="{distance: max_distance}">Radar</a>
                     </li>
                 </ul>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4" [formGroup]="filterForm">
                         <div class="card">
                             <div class="card-body">
                                 <h5>Maxima Distancia</h5>
                                 <mat-slider thumbLabel [displayWith]="formatLabel" min="0" max="50" step="1" value="5" (change)="changeSliderDistanca($event)"></mat-slider>
                             </div>
                         </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Giro del Negocio" formControlName="core_business"></mat-form-field>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="card" *ngFor="let business of (businesses$ | async) | sortBy:'asc':'distance' | filter: { max_distance : max_distance }" (click)="go(business.id)">
+                        <div class="card" *ngFor="let business of (businesses$ | async) | sortBy:'asc':'distance' | filter: { max_distance : max_distance, core_business: filterForm.value.core_business }" (click)="go(business.id)">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
