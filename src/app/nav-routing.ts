@@ -44,7 +44,7 @@ export const navRoutes: NavRoute[] = [{
             ),
     },
     {
-        data: { title: 'Analytics' },
+        data: { title: 'Analisis' },
         icon: 'graphic_eq',
         group: '',
         path: 'analisis',

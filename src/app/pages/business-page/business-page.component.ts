@@ -19,7 +19,8 @@ export class BusinessPageComponent implements OnInit {
     public max_distance=5;
 
     filterForm: FormGroup= new FormGroup({
-        core_business: new FormControl()
+        core_business: new FormControl(),
+        name: new FormControl()
     })
 
 
