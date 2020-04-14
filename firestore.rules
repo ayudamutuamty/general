@@ -10,4 +10,9 @@ service cloud.firestore {
       allow read: if true;
     }
   }
+  match /businesses/{businessId} {
+      allow  read, update, delete, created: if request.auth.uid != null;
+      allow read: if true;
+
+    }
 }
