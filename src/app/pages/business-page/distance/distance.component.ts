@@ -25,14 +25,11 @@ export class DistanceComponent implements OnInit {
     businesses$: Observable < Business[] > ;
 
     // Radius
-    radius;
-    distance;
 
     zoom;
 
     constructor(
         private mapsAPILoader: MapsAPILoader,
-        private activatedRouter: ActivatedRoute,
         private businessService: BusinessService
     ) {
 
@@ -40,11 +37,6 @@ export class DistanceComponent implements OnInit {
 
 
     ngOnInit() {
-        //load Map
-
-        this.distance = this.activatedRouter.snapshot.queryParamMap.get('distance');
-        this.radius = 1000 * Number(this.distance);
-
 
         this.mapsAPILoader.load().then(() => {
             this.setCurrentLocation();

@@ -38,7 +38,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="14">
+                              <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="14">
                                     <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
                                 </agm-map>
                             </div>
@@ -132,7 +132,7 @@
                         </div>
                     </div>
                 </div>
-                <button ngIf="(authService.user | async)?.uid && current_user && business && current_user.uid == business.user_id" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="delete()">Borrar</button>
+                <button *ngIf="(authService.user | async)?.uid" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="delete()">Borrar</button>
             </div>
         </div>
     </div>
