@@ -1,11 +1,30 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav mode="side" [opened]="isOpen">
         <mat-nav-list>
-            <app-nav-menu-item *ngFor="let navigationItem of getNavigationItems()" [navigationItem]="navigationItem"></app-nav-menu-item>
+            <a mat-list-item class="sidenav-item" [routerLink]="['/app/inicio']" disableRipple>
+                <div class="item-selector"></div>
+                <div fxFlex="100%"> Inicio </div>
+                <mat-icon>home</mat-icon>
+            </a>
+            <a *ngIf="(authService.user | async)?.uid" mat-list-item class="sidenav-item" [routerLink]="['/app/perfil']" disableRipple >
+                <div class="item-selector"></div>
+                <div fxFlex="100%"> Perfil </div>
+                <mat-icon>person_pin</mat-icon>
+            </a>
+            <a mat-list-item class="sidenav-item" [routerLink]="['/app/negocios']" disableRipple>
+                <div class="item-selector"></div>
+                <div fxFlex="100%"> Negocios </div>
+                <mat-icon>business</mat-icon>
+            </a>
+            <a mat-list-item class="sidenav-item" [routerLink]="['/app/analisis']" disableRipple>
+                <div class="item-selector"></div>
+                <div fxFlex="100%"> Analisis COVID </div>
+                <mat-icon>graphic_eq</mat-icon>
+            </a>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-        <app-nav-toolbar [activePage]="getActivePage()" (toggleSideNav)="toggleSideNav()" (logout)="logout()" [previousUrl]="getPreviousUrl()"></app-nav-toolbar>
+        <app-nav-toolbar (toggleSideNav)="toggleSideNav()" (logout)="logout()"></app-nav-toolbar>
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

@@ -37,26 +37,26 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-12"> 
-                                <agm-map  [latitude]="latitude" [longitude]="longitude" [zoom]="14">
-                                    <agm-marker [latitude]="latitude" [longitude]="longitude"  ></agm-marker>
+                            <div class="col-md-12">
+                                <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="14">
+                                    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
                                 </agm-map>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                  <label class="title">Direccion: </label><label>{{ business.address}}</label>
+                                <label class="title">Direccion: </label><label>{{ business.address}}</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                  <label class="title">Ciudad: </label><label>{{ business.city}}</label>
+                                <label class="title">Ciudad: </label><label>{{ business.city}}</label>
                             </div>
                             <div class="col-md-4">
-                                    <label class="title">Estado: </label><label>{{ business.state}}</label>
+                                <label class="title">Estado: </label><label>{{ business.state}}</label>
                             </div>
                             <div class="col-md-4">
-                                 <label>Codigo Postal: </label><label>{{ business.code_postal}}</label>
+                                <label>Codigo Postal: </label><label>{{ business.code_postal}}</label>
                             </div>
                         </div>
                     </div>
@@ -97,19 +97,19 @@
                                     <li class="list-group-item option" *ngIf="business.type_of_operation.owner_delivery">
                                         <h6>Envio a domicilio propio</h6>
                                     </li>
-                                    <li class="list-group-item option"  *ngIf="business.type_of_operation.app_delivery">
+                                    <li class="list-group-item option" *ngIf="business.type_of_operation.app_delivery">
                                         <h6>Envio a domicilio por plataformas como Uber y Rappi</h6>
                                     </li>
-                                    <li class="list-group-item option"  *ngIf="business.type_of_operation.client_delivery">
+                                    <li class="list-group-item option" *ngIf="business.type_of_operation.client_delivery">
                                         <h6>Ponerse de acuerdo para la entrega</h6>
                                     </li>
-                                    <li class="list-group-item option"  *ngIf="business.type_of_operation.just_to_go">
+                                    <li class="list-group-item option" *ngIf="business.type_of_operation.just_to_go">
                                         <h6>Solo para llevar</h6>
                                     </li>
-                                    <li class="list-group-item option"  *ngIf="business.type_of_operation.pre_order">
+                                    <li class="list-group-item option" *ngIf="business.type_of_operation.pre_order">
                                         <h6>Pedidos anticipados</h6>
                                     </li>
-                                    <li class="list-group-item option"  *ngIf="business.type_of_operation.pick_up_shop">
+                                    <li class="list-group-item option" *ngIf="business.type_of_operation.pick_up_shop">
                                         <h6>Recoger en tienda</h6>
                                     </li>
                                     <li class="list-group-item option" *ngIf="business.type_of_operation.other">
@@ -132,7 +132,7 @@
                         </div>
                     </div>
                 </div>
-                <button  *ngIf="current_user && business && current_user.uid == business.user_id" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="delete()">Borrar</button>
+                <button ngIf="(authService.user | async)?.uid && current_user && business && current_user.uid == business.user_id" mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="delete()">Borrar</button>
             </div>
         </div>
     </div>

@@ -9,12 +9,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LogoModule } from '../logo/logo.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NavMenuItemComponent } from './nav-menu-item/nav-menu-item.component';
 import { NavToolbarComponent } from './nav-toolbar/nav-toolbar.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
-    declarations: [NavComponent, NavMenuItemComponent, NavToolbarComponent],
+    declarations: [NavComponent, NavToolbarComponent],
     imports: [
         CommonModule,
         RouterModule,

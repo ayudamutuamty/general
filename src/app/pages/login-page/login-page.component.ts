@@ -18,9 +18,7 @@ export class LoginPageComponent implements OnInit {
 
     ngOnInit() {
         this.errorMessage = '';
-        if (this.authService.user) {
-            this.navigateTo();
-        }
+    
     }
 
     public async login(email: string, password: string) {

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Page } from '../../../services/navigation/navigation.service';
+import { AuthService } from '../../../../auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-nav-toolbar',
@@ -7,12 +8,11 @@ import { Page } from '../../../services/navigation/navigation.service';
     styleUrls: ['./nav-toolbar.component.scss'],
 })
 export class NavToolbarComponent implements OnInit {
-    @Input() activePage: Page;
-    @Input() previousUrl: string[];
     @Output() toggleSideNav = new EventEmitter();
     @Output() logout = new EventEmitter();
 
-    constructor() {}
+    constructor(public authService: AuthService,
+        private router: Router) {}
 
     ngOnInit() {}
 
@@ -22,5 +22,10 @@ export class NavToolbarComponent implements OnInit {
 
     public onLogout() {
         this.logout.emit();
+    }
+
+    public onLogin() {
+        this.router.navigate(['/sesion']);
+
     }
 }

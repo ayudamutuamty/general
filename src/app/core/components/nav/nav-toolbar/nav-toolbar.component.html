@@ -2,11 +2,11 @@
     <button mat-icon-button (click)="onToggleSideNav()">
         <mat-icon>menu</mat-icon>
     </button>
-    <a mat-icon-button [routerLink]="previousUrl" *ngIf="activePage?.isChild">
-        <mat-icon>arrow_back</mat-icon>
-    </a>
     <div fxFlex="100%"></div>
-    <button mat-icon-button (click)="onLogout()">
+    <button mat-icon-button (click)="onLogout()" *ngIf="(authService.user | async)?.uid">
         <mat-icon>logout</mat-icon>
+    </button>
+    <button mat-icon-button  (click)="onLogin()" *ngIf="!(authService.user | async)?.uid">
+        <mat-icon>input</mat-icon>
     </button>
 </mat-toolbar>

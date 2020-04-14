@@ -5,22 +5,9 @@ import {
     PreloadAllModules,
     RouteReuseStrategy,
 } from '@angular/router';
-import { navRoutes, sideNavPath } from './nav-routing';
 import { NavComponent } from './core/components/nav/nav.component';
-import { AuthGuard } from './auth/auth.guard';
-import { CustomRouteReuseStrategy } from './core/nav-reuse-strategy';
-import { NavGuard } from './core/nav.guard';
 
-const routes: Routes = [{path: 'analytics',loadChildren: () =>
-                import('./pages/analytics-page/analytics-page.module').then(
-                    m => m.AnalyticsPageModule,
-                ),},{path: 'business',loadChildren: () =>
-                import('./pages/business-page/business-page.module').then(
-                    m => m.BusinessPageModule,
-                ),},{path: 'profile',loadChildren: () =>
-                import('./pages/profile-page/profile-page.module').then(
-                    m => m.ProfilePageModule,
-                ),},{
+const routes: Routes = [{
         path: 'sesion',
         loadChildren: () =>
             import('./pages/login-page/login-page.module').then(
@@ -34,15 +21,46 @@ const routes: Routes = [{path: 'analytics',loadChildren: () =>
             ),
     },
     {
-        path: sideNavPath,
+        path: 'app',
         component: NavComponent,
-        children: navRoutes,
-        canActivate: [AuthGuard],
-        canActivateChild: [NavGuard],
+        children: [{
+                path: 'inicio',
+                loadChildren: () =>
+                    import('./pages/home-page/home-page.module').then(
+                        m => m.HomePageModule,
+                    ),
+            },
+            {
+                path: '',
+                redirectTo: 'inicio',
+                pathMatch: 'full',
+            },
+            {
+                path: 'perfil',
+                loadChildren: () =>
+                    import('./pages/profile-page/profile-page.module').then(
+                        m => m.ProfilePageModule,
+                    ),
+            }, {
+
+                path: 'negocios',
+                loadChildren: () =>
+                    import('./pages/business-page/business-page.module').then(
+                        m => m.BusinessPageModule,
+                    ),
+            },
+            {
+                path: 'analisis',
+                loadChildren: () =>
+                    import('./pages/analytics-page/analytics-page.module').then(
+                        m => m.AnalyticsPageModule,
+                    ),
+            }
+        ],
     },
     {
         path: '**',
-        redirectTo: 'sesion',
+        redirectTo: '/app/inicio',
     },
 ];
 
@@ -50,9 +68,7 @@ const routes: Routes = [{path: 'analytics',loadChildren: () =>
     imports: [
         RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
     ],
-    exports: [RouterModule],
-    providers: [
-        { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
-    ],
+    exports: [RouterModule]
+
 })
 export class AppRoutingModule {}

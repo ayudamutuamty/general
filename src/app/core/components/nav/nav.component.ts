@@ -1,9 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {
-    NavigationService,
-    Page,
-} from '../../services/navigation/navigation.service';
-import { NavRoute } from '../../../nav-routing';
 import { AuthService } from '../../../auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -16,8 +11,7 @@ export class NavComponent implements OnInit {
     isOpen = false;
 
     constructor(
-        private navigationService: NavigationService,
-        private authService: AuthService,
+        public authService: AuthService,
         private router: Router,
     ) {}
 
@@ -27,20 +21,12 @@ export class NavComponent implements OnInit {
         this.isOpen = !this.isOpen;
     }
 
-    public getNavigationItems(): NavRoute[] {
-        return this.navigationService.getNavigationItems();
-    }
 
-    public getActivePage(): Page {
-        return this.navigationService.getActivePage();
-    }
 
     public logout() {
         this.authService.logout();
-        this.router.navigate(['login'], { replaceUrl: true });
+        this.router.navigate(['/app/inicio']);
     }
 
-    public getPreviousUrl(): string[] {
-        return this.navigationService.getPreviousUrl();
-    }
+ 
 }

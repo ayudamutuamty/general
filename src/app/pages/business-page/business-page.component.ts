@@ -5,6 +5,7 @@ import { BusinessService } from '../../core/services/business.service';
 import { Router } from '@angular/router';
 import { GeolocationService } from '../../core/services/geolocation.service';
 import {FormGroup, FormControl} from '@angular/forms';
+import { AuthService } from '../../auth/auth.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class BusinessPageComponent implements OnInit {
 
 
     constructor(private businessService: BusinessService,
-        private router: Router, private geo: GeolocationService) {
+        private router: Router, private geo: GeolocationService,
+        public authService: AuthService) {
 
     }
 

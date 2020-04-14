@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-12">
                 <ul class="nav justify-content-end">
-                    <li class="nav-item">
+                    <li class="nav-item" *ngIf="(authService.user | async)?.uid">
                         <a class="btn btn-success nav-link" [routerLink]="['nuevo']">Nuevo</a>
                     </li>
                     <li class="nav-item">
