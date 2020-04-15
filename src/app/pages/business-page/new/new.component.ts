@@ -10,6 +10,7 @@ import { take } from 'rxjs/operators';
 import * as firebase from 'firebase/app';
 import { GeolocationService } from '../../../core/services/geolocation.service';
 import { Router } from '@angular/router';
+import { UploadService } from '../../../core/services/upload.service';
 
 @Component({
     selector: 'app-new',
@@ -31,6 +32,7 @@ export class NewComponent implements OnInit {
         state: new FormControl(),
         city: new FormControl(),
         email: new FormControl(),
+        logo: new FormControl(),
         description: new FormControl(),
         type_of_operation: new FormGroup({
             owner_delivery: new FormControl(false),
@@ -59,7 +61,8 @@ export class NewComponent implements OnInit {
         private bs: BusinessService,
         private us: UserService,
         private geolocationService: GeolocationService,
-        private router: Router) {}
+        private router: Router,
+        private uploadService: UploadService) {}
 
     ngOnInit(): void {
 
@@ -72,9 +75,14 @@ export class NewComponent implements OnInit {
     async save() {
 
         const user = await this.authService.user.pipe(take(1)).toPromise();
-        const business: Business = this.businessForm.value;
+        let file= this.businessForm.value.logo;
 
-        console.log(this.current_location);
+        this.uploadService.uploadFile(file);
+
+
+        const business: Business = this.businessForm.value;
+        delete business['logo'];
+
         business.location = new firebase.firestore.GeoPoint(this.current_location.latitude, this.current_location.longitude);
         business.user = this.us.getUserReference(user.uid);
         business.user_id = user.uid;

@@ -19,6 +19,7 @@ import { environment } from '../../../environments/environment';
 import { InformationComponent } from './information/information.component';
 import { SortDistancePipe } from './pipes/sort-distance.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 @NgModule({
     declarations: [BusinessPageComponent, NewComponent, 
@@ -33,6 +34,7 @@ import { FilterPipe } from './pipes/filter.pipe';
         MatFormFieldModule,
         MatCheckboxModule,
         MatSliderModule,
+        MaterialFileInputModule,
         AgmCoreModule.forRoot({
             apiKey: environment.google.apiKey
         })

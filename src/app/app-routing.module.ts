@@ -23,17 +23,17 @@ const routes: Routes = [{
     {
         path: 'app',
         component: NavComponent,
-        children: [{
-                path: 'inicio',
-                loadChildren: () =>
-                    import('./pages/home-page/home-page.module').then(
-                        m => m.HomePageModule,
-                    ),
-            },
+        children: [
             {
                 path: '',
-                redirectTo: 'inicio',
+                redirectTo: 'analisis',
                 pathMatch: 'full',
+            }, {
+                path: 'contacto',
+                loadChildren: () =>
+                    import('./pages/contact-page/contact-page.module').then(
+                        m => m.ContactPageModule
+                    ),
             },
             {
                 path: 'perfil',
@@ -60,7 +60,7 @@ const routes: Routes = [{
     },
     {
         path: '**',
-        redirectTo: '/app/inicio',
+        redirectTo: '/app/analisis',
     },
 ];
 

@@ -1,11 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav mode="side" [opened]="isOpen">
         <mat-nav-list>
-            <a mat-list-item class="sidenav-item" [routerLink]="['/app/inicio']" disableRipple>
-                <div class="item-selector"></div>
-                <div fxFlex="100%"> Inicio </div>
-                <mat-icon>home</mat-icon>
-            </a>
             <a *ngIf="(authService.user | async)?.uid" mat-list-item class="sidenav-item" [routerLink]="['/app/perfil']" disableRipple >
                 <div class="item-selector"></div>
                 <div fxFlex="100%"> Perfil </div>
@@ -20,6 +15,11 @@
                 <div class="item-selector"></div>
                 <div fxFlex="100%"> Analisis COVID </div>
                 <mat-icon>graphic_eq</mat-icon>
+            </a>
+                   <a mat-list-item class="sidenav-item" [routerLink]="['/app/contacto']" disableRipple>
+                <div class="item-selector"></div>
+                <div fxFlex="100%"> Contacto </div>
+                <mat-icon> contact_mail</mat-icon>
             </a>
         </mat-nav-list>
     </mat-sidenav>
