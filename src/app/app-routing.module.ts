@@ -55,6 +55,12 @@ const routes: Routes = [{
                     import('./pages/analytics-page/analytics-page.module').then(
                         m => m.AnalyticsPageModule,
                     ),
+            }, {
+                path: 'aviso-privacidad',
+                loadChildren: () =>
+                    import('./pages/privacy-notice-page/privacy-notice-page.module').then(
+                        m => m.PrivacyNoticePageModule,
+                    ),
             }
         ],
     },

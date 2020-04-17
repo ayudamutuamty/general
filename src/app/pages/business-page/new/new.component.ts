@@ -77,8 +77,7 @@ export class NewComponent implements OnInit {
         const user = await this.authService.user.pipe(take(1)).toPromise();
         let file= this.businessForm.value.logo;
 
-        this.uploadService.uploadFile(file);
-
+        let url = await this.uploadService.uploadFile(file);
 
         const business: Business = this.businessForm.value;
         delete business['logo'];
@@ -86,6 +85,7 @@ export class NewComponent implements OnInit {
         business.location = new firebase.firestore.GeoPoint(this.current_location.latitude, this.current_location.longitude);
         business.user = this.us.getUserReference(user.uid);
         business.user_id = user.uid;
+        business.url= url;
         const res = await this.bs.create(business);
 
         this.router.navigateByUrl('/app/negocios')

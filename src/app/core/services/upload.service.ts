@@ -11,11 +11,21 @@ export class UploadService {
     }
 
 
-    uploadFile(event: any) {
+    uploadFile(event: any): Promise<string> {
+        return new Promise<any>((resolve, reject) => {
     	console.log(event);
-    const file = event.files[0];
-    const filePath = file.name;
-    const task = this.storage.upload(filePath, file);
+        const file = event.files[0];
+        const filePath = file.name;
+        this.storage.upload(filePath, file).then(doc=>{
+            doc.ref.getDownloadURL().then(url=>{
+                resolve(url);
+            })
+            //console.log(doc);
+            //resolve(doc.metadata.downloadURLs);
+ 
+        })
+    });
+
     }
 
 }
