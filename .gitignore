@@ -45,4 +45,4 @@ testem.log
 .DS_Store
 Thumbs.db
 /functions/covid19-273816-0a4922a6f109.json
-functions/sendgrid.ts
+/functions/sendgrid.ts
