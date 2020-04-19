@@ -44,3 +44,4 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/functions/covid19-273816-0a4922a6f109.json

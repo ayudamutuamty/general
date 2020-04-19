@@ -26,7 +26,7 @@ const routes: Routes = [{
         children: [
             {
                 path: '',
-                redirectTo: 'analisis',
+                redirectTo: 'contacto',
                 pathMatch: 'full',
             }, {
                 path: 'contacto',
@@ -66,7 +66,7 @@ const routes: Routes = [{
     },
     {
         path: '**',
-        redirectTo: '/app/analisis',
+        redirectTo: '/app/contacto',
     },
 ];
 

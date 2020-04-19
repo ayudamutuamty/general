@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ContactsService } from '../../core/services/contacts.service';
+import { Contact } from '../../core/model/contact';
 
 @Component({
     selector: 'app-contact-page',
     templateUrl: './contact-page.component.html',
-    styleUrls: ['./contact-page.component.scss']
+    styleUrls: ['./contact-page.component.scss'],
+    providers: [ContactsService]
 })
 export class ContactPageComponent implements OnInit {
 
@@ -18,13 +21,19 @@ export class ContactPageComponent implements OnInit {
 
     })
 
-    constructor() {}
+    constructor(private contactService: ContactsService) {}
 
     ngOnInit(): void {}
 
 
-    send(){
-        
+    async send() {
+
+        let contact: Contact = this.contactForm.value;
+        contact = await this.contactService.create(contact);
+        this.contactForm.reset();
+
+
+
     }
 
 }
