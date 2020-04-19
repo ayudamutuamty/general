@@ -1,3 +1,3 @@
 export const sendGrid = {
-	api: ''
+	api: '' 
 }
