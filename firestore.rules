@@ -12,6 +12,13 @@ service cloud.firestore {
       allow create, read, delete, update: if request.auth.uid != null;
 
     }
+    
+        match /contacts/{document=**} {
+      allow create, read, delete, update: if true;
+
+    }
+    
+    
     }
     
   
