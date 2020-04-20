@@ -17,6 +17,11 @@ service cloud.firestore {
       allow create, read, delete, update: if true;
 
     }
+
+            match /mail/{document=**} {
+      allow create, read, delete, update: if true;
+
+    }
     
     
     }

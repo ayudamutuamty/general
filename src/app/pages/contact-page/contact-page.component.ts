@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ContactsService } from '../../core/services/contacts.service';
+import { MailService } from '../../core/services/mail.service';
+import { Mail } from '../../core/model/mail';
 import { Contact } from '../../core/model/contact';
 
 @Component({
     selector: 'app-contact-page',
     templateUrl: './contact-page.component.html',
     styleUrls: ['./contact-page.component.scss'],
-    providers: [ContactsService]
+    providers: [MailService]
 })
 export class ContactPageComponent implements OnInit {
 
@@ -21,7 +22,7 @@ export class ContactPageComponent implements OnInit {
 
     })
 
-    constructor(private contactService: ContactsService) {}
+    constructor(private mailService: MailService) {}
 
     ngOnInit(): void {}
 
@@ -29,7 +30,18 @@ export class ContactPageComponent implements OnInit {
     async send() {
 
         let contact: Contact = this.contactForm.value;
-        contact = await this.contactService.create(contact);
+        let text: string = 'Correo: ' + contact.email + '\n';
+        text += 'Nombre: ' + contact.first_name + ' ' + contact.last_name + '\n';
+        text += 'Descripcion: ' + contact.body;
+
+        let mail: Mail = {
+            to: ['ayudamutuamty@gmail.com'],
+            message: {
+                subject: contact.subject,
+                text: text
+            }
+        }
+        mail = await this.mailService.create(mail);
         this.contactForm.reset();
 
 
